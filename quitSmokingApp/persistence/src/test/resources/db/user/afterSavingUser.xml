@@ -2,7 +2,5 @@
 <dataset>
 	<User username="user1" name="name1" surname="surname1" birth_date="1990-10-01" email="abc@123.com" password="123456" />
 	<User username="user2" name="name2" surname="surname2" birth_date="1990-01-10" email="123@abc.com" password="789123" />
-	
-    <Stats id="1" quit_smoking="2018-10-10" smokes_per_day="20" smokes_pack_price="5.0" smoking_years="10" user_id="user1" />
-    <Stats id="2" quit_smoking="2018-02-02" smokes_per_day="10" smokes_pack_price="6.0" smoking_years="5" user_id="user2" />
+	<User username="igarcia10" password="gatitos" />
 </dataset>

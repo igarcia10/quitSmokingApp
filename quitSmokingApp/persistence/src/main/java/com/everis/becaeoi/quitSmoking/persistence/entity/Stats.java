@@ -33,5 +33,12 @@ public class Stats implements AppEntity {
 	@OneToOne(fetch=FetchType.EAGER)
 	@JoinColumn(name="user_id")
 	private User user;
+	
+	//TODO Core logic
+	private Long timeWithoutSmoking;
+	private Integer smokesSaved;
+	private Double moneySaved;
+	private Double daysSaved;
+	private Long timeSaved;
 
 }

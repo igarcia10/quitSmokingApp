@@ -17,6 +17,8 @@ import org.springframework.test.context.transaction.TransactionalTestExecutionLi
 import com.everis.becaeoi.quitSmoking.persistence.entity.User;
 import com.github.springtestdbunit.DbUnitTestExecutionListener;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
+import com.github.springtestdbunit.annotation.ExpectedDatabase;
+import com.github.springtestdbunit.assertion.DatabaseAssertionMode;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -31,9 +33,30 @@ public class UserRepositoryIT {
 	@DatabaseSetup("/db/user/init.xml")
 	public void testFindAll() {
 		// Act
-		List<User> stats = (List<User>) repository.findAll();
+		List<User> users = (List<User>) repository.findAll();
 		// Assert
-		assertEquals(2, stats.size());
+		assertEquals(2, users.size());
+	}
+	
+	@Test
+	@DatabaseSetup("/db/user/init.xml")
+	public void testFindById() {
+		// Act
+		User user = repository.findById("user1").get();
+		// Assert
+		assertEquals("name1", user.getName());
+	}
+	
+	@Test
+	@DatabaseSetup("/db/user/init.xml")
+	@ExpectedDatabase(value = "/db/user/afterSavingUser.xml", assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
+	public void testSave() {
+		//Arrange
+		User user = new User();
+		user.setUsername("igarcia10");
+		user.setPassword("gatitos");
+		//Act
+		repository.save(user);
 	}
 
 }

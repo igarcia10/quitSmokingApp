@@ -1,6 +1,7 @@
 package com.everis.becaeoi.quitSmoking.persistence.repository;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
 
@@ -36,4 +37,37 @@ public class StatsRepositoryIT {
 		assertEquals(2, stats.size());
 	}
 
+	@Test
+	@DatabaseSetup("/db/stats/init.xml")
+	public void testFindById() {
+		// Act
+		Stats stats = repository.findById(1L).get();
+		// Assert
+		assertEquals(Integer.valueOf(20), stats.getSmokesPerDay());
+	}
+
+	@Test
+	@DatabaseSetup("/db/stats/init.xml")
+	public void testFindByUser() {
+		// Act
+		Stats stats = repository.findByUserUsername("user1");
+		// Assert
+		assertEquals(Integer.valueOf(20), stats.getSmokesPerDay());
+	}
+
+	@Test
+	@DatabaseSetup("/db/stats/init.xml")
+	public void testSave() {
+		// Arrange
+		Stats stats = new Stats();
+		stats.setSmokesPackPrice(5.0);
+		stats.setSmokingYears(10);
+		stats.setSmokesPerDay(20);
+		// Act
+		repository.save(stats);
+		// Assert
+		List<Stats> list = (List<Stats>) repository.findAll();
+		assertEquals(3, list.size());
+		assertNotNull(list.get(2).getId());
+	}
 }
