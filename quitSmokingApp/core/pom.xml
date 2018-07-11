@@ -5,7 +5,7 @@
     <artifactId>quitSmokingApp</artifactId>
     <version>0.0.1-SNAPSHOT</version>
   </parent>
-  <artifactId>Core</artifactId>
+  <artifactId>core</artifactId>
   <dependencies>
   	<dependency>
   		<groupId>com.everis.becaeoi.quitSmoking</groupId>
