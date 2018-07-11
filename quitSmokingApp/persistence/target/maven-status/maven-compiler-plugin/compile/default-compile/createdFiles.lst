@@ -1,0 +1,5 @@
+com\everis\becaeoi\quitSmoking\persistence\entity\Stats.class
+com\everis\becaeoi\quitSmoking\persistence\repository\UserRepository.class
+com\everis\becaeoi\quitSmoking\persistence\entity\User.class
+com\everis\becaeoi\quitSmoking\persistence\repository\StatsRepository.class
+com\everis\becaeoi\quitSmoking\persistence\entity\AppEntity.class
