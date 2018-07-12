@@ -27,7 +27,7 @@ public class StatsController {
 	@Autowired
 	private DozerBeanMapper mapper;
 	
-	@GetMapping("/")
+	@GetMapping
 	public List<StatsDTO> findAll(){
 		List<Stats> statsList = manager.findAll();
 		List<StatsDTO> statsDTOList = new ArrayList<>();
@@ -42,7 +42,7 @@ public class StatsController {
 		return mapper.map(manager.showStatsInfo(username),StatsInfoDTO.class);
 	}
 	
-	@PostMapping("/")
+	@PostMapping
 	public StatsDTO save(@RequestBody StatsDTO dto) {
 		return mapper.map(manager.save(mapper.map(dto, Stats.class)),StatsDTO.class);
 	}

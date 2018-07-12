@@ -6,10 +6,10 @@ import java.util.List;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.everis.becaeoi.quitSmoking.core.manager.UserManager;
@@ -26,22 +26,24 @@ public class UserController {
 	@Autowired
 	private DozerBeanMapper mapper;
 	
-	@GetMapping("/")
+	@GetMapping
 	public List<UserDTO> findAll(){
 		List<User> userList = manager.findAll();
 		List<UserDTO> userDTOList = new ArrayList<>();
-		for (User user : userList) {
-			userDTOList.add(mapper.map(user, UserDTO.class));
+		if(null!=userList) {
+			for (User user : userList) {
+				userDTOList.add(mapper.map(user, UserDTO.class));
+			}
 		}
 		return userDTOList;
 	}
 	
 	@GetMapping("/{id}")
-	public UserDTO findByUsername(@RequestParam String username){
+	public UserDTO findByUsername(@PathVariable("id") String username){
 		return mapper.map(manager.findByUsername(username),UserDTO.class);
 	}
 	
-	@PostMapping("/")
+	@PostMapping
 	public UserDTO save(@RequestBody UserDTO dto) {
 		return mapper.map(manager.save(mapper.map(dto, User.class)),UserDTO.class);
 	}

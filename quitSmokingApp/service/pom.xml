@@ -29,12 +29,18 @@
 			<artifactId>springfox-swagger-ui</artifactId>
 			<version>2.7.0</version>
 		</dependency>
-		
+
 		<!-- https://mvnrepository.com/artifact/net.sf.dozer/dozer -->
 		<dependency>
 			<groupId>net.sf.dozer</groupId>
 			<artifactId>dozer</artifactId>
 			<version>5.5.1</version>
+		</dependency>
+		<!-- TESTS -->
+		<dependency>
+			<groupId>com.everis.becaeoi.quitSmoking</groupId>
+			<artifactId>test</artifactId>
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 </project>
