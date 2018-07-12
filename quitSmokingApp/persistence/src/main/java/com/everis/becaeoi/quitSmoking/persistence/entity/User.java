@@ -5,8 +5,8 @@ import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -28,8 +28,8 @@ public class User implements AppEntity {
 	private String email;
 	private String password;
 	
-	@OneToOne(mappedBy="user", fetch=FetchType.LAZY)
-	@JoinColumn(name="stats_id")
+	@OneToOne(fetch=FetchType.LAZY)
+	@PrimaryKeyJoinColumn
 	private Stats stats;
 
 }

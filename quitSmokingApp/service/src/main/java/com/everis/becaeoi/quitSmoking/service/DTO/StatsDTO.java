@@ -17,10 +17,10 @@ public class StatsDTO {
 	private Double smokesPackPrice;
 	private Integer smokingYears;
 	private User user;
-	private Long timeWithoutSmoking;
+	private String timeWithoutSmoking;
 	private Integer smokesSaved;
 	private Double moneySaved;
 	private Double daysSaved;
-	private Long timeSaved;
+	private Integer timeSaved;
 
 }

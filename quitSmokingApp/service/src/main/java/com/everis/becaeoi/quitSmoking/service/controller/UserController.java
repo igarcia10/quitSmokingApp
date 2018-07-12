@@ -1,5 +1,6 @@
 package com.everis.becaeoi.quitSmoking.service.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.dozer.DozerBeanMapper;
@@ -25,15 +26,19 @@ public class UserController {
 	@Autowired
 	private DozerBeanMapper mapper;
 	
-	@SuppressWarnings("unchecked")
 	@GetMapping("/")
 	public List<UserDTO> findAll(){
-		return (List<UserDTO>) mapper.map(manager.findAll(),UserDTO.class);
+		List<User> userList = manager.findAll();
+		List<UserDTO> userDTOList = new ArrayList<>();
+		for (User user : userList) {
+			userDTOList.add(mapper.map(user, UserDTO.class));
+		}
+		return userDTOList;
 	}
 	
 	@GetMapping("/{id}")
-	public UserDTO findById(@RequestParam String id){
-		return mapper.map(manager.findById(id),UserDTO.class);
+	public UserDTO findByUsername(@RequestParam String username){
+		return mapper.map(manager.findByUsername(username),UserDTO.class);
 	}
 	
 	@PostMapping("/")
