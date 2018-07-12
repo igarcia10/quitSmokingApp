@@ -6,10 +6,10 @@ import java.util.List;
 import org.dozer.DozerBeanMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.everis.becaeoi.quitSmoking.core.manager.StatsManager;
@@ -39,8 +39,8 @@ public class StatsController {
 		return statsDTOList;
 	}
 
-	@GetMapping("/{username}")
-	public StatsInfoDTO showStatsInfo(@RequestParam String username) {
+	@GetMapping("/{username}/statistics")
+	public StatsInfoDTO showStatsInfo(@PathVariable("username") String username) {
 		return mapper.map(manager.showStatsInfo(username), StatsInfoDTO.class);
 	}
 

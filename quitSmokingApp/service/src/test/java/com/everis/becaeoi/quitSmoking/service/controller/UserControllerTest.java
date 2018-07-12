@@ -2,7 +2,6 @@ package com.everis.becaeoi.quitSmoking.service.controller;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -117,9 +116,11 @@ public class UserControllerTest {
 	@Test
 	public void testSave() throws Exception {
 		// Arrange
+		UserDTO userDTO = new UserDTO();
 		Mockito.when(manager.save(null)).thenReturn(null);
 		// Act
-		ResultActions perform = mockMvc.perform(get("/users"));
+		ResultActions perform = mockMvc.perform(post("/users").content(mapper.writeValueAsString(userDTO))
+				.contentType(MediaType.APPLICATION_JSON).accept(MediaType.APPLICATION_JSON));
 		// Assert
 		perform.andExpect(status().isOk());
 	}
