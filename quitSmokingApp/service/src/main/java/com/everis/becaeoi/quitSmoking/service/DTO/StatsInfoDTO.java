@@ -10,7 +10,7 @@ public class StatsInfoDTO {
 	private String timeWithoutSmoking;
 	private Integer smokesSaved;
 	private Double moneySaved;
-	private Double daysSaved;
+	private Double lifeTimeGained;
 	private Integer timeSaved;
 
 }
