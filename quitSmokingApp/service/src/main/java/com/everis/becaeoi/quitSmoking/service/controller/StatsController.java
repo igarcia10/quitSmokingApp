@@ -20,31 +20,33 @@ import com.everis.becaeoi.quitSmoking.service.DTO.StatsInfoDTO;
 @RestController
 @RequestMapping("/stats")
 public class StatsController {
-	
+
 	@Autowired
 	private StatsManager manager;
-	
+
 	@Autowired
 	private DozerBeanMapper mapper;
-	
+
 	@GetMapping
-	public List<StatsDTO> findAll(){
+	public List<StatsDTO> findAll() {
 		List<Stats> statsList = manager.findAll();
 		List<StatsDTO> statsDTOList = new ArrayList<>();
-		for (Stats stats : statsList) {
-			statsDTOList.add(mapper.map(stats, StatsDTO.class));
+		if (null != statsList) {
+			for (Stats stats : statsList) {
+				statsDTOList.add(mapper.map(stats, StatsDTO.class));
+			}
 		}
 		return statsDTOList;
 	}
-	
+
 	@GetMapping("/{username}")
-	public StatsInfoDTO showStatsInfo(@RequestParam String username){
-		return mapper.map(manager.showStatsInfo(username),StatsInfoDTO.class);
+	public StatsInfoDTO showStatsInfo(@RequestParam String username) {
+		return mapper.map(manager.showStatsInfo(username), StatsInfoDTO.class);
 	}
-	
+
 	@PostMapping
 	public StatsDTO save(@RequestBody StatsDTO dto) {
-		return mapper.map(manager.save(mapper.map(dto, Stats.class)),StatsDTO.class);
+		return mapper.map(manager.save(mapper.map(dto, Stats.class)), StatsDTO.class);
 	}
 
 }
