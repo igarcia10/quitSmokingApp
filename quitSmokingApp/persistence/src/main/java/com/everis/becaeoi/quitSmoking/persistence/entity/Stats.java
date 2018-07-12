@@ -2,12 +2,12 @@ package com.everis.becaeoi.quitSmoking.persistence.entity;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -30,13 +30,8 @@ public class Stats implements AppEntity {
 	private Double smokesPackPrice;
 	private Integer smokingYears;
 	
-	@OneToOne(mappedBy="stats", fetch=FetchType.EAGER, cascade=CascadeType.ALL)
+	@OneToOne(fetch=FetchType.EAGER)
+ 	@JoinColumn(name="user_id")
 	private User user;
-	
-	private String timeWithoutSmoking;
-	private Integer smokesSaved;
-	private Double moneySaved;
-	private Double daysSaved;//TODO
-	private Integer timeSaved;
 
 }

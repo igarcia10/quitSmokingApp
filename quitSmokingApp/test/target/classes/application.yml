@@ -6,7 +6,7 @@ spring:
   datasource:
     password: a
     username: a
-    url: jdbc:h2:mem:squash-test
+    url: jdbc:h2:mem:smoking
   jpa:
     hibernate:
       ddl-auto: create

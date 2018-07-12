@@ -26,33 +26,28 @@ public class StatsManager {
 		return repository.save(stats);
 	}
 	
-	public Stats findByUserUsername(String username){
+	public StatsInfo showStatsInfo(String username){
 		Stats DBStats = repository.findByUserUsername(username);
-		
-		return updateStats(DBStats);
+		return getStatsInfo(DBStats);
 	}
 	
-	private Stats updateStats(Stats stats) {
+	private StatsInfo getStatsInfo(Stats stats) {
 		
+		StatsInfo statsInfo = new StatsInfo();		
 		GregorianCalendar gc = new GregorianCalendar();
 		gc.setTime(stats.getQuitSmoking());
 		DateTime start = new DateTime(gc);
 		DateTime end = DateTime.now();
 		Period period = new Period(start,end);
-		
-		stats.setTimeWithoutSmoking(period.toString());
-		
 		Days days = Days.daysBetween(start, end);
 		
-		stats.setSmokesSaved(days.getDays()*stats.getSmokesPerDay());
-		stats.setMoneySaved((stats.getSmokesPerDay()*stats.getSmokesPackPrice()/20)*days.getDays());
-		stats.setTimeSaved(stats.getSmokesPerDay()*10*days.getDays());
-		if(null==stats.getDaysSaved()) {
-			stats.setDaysSaved(0d);
-		}
-		stats.setDaysSaved(stats.getDaysSaved()+0.0076);
+		statsInfo.setTimeWithoutSmoking(period.toString());
+		statsInfo.setSmokesSaved(days.getDays()*stats.getSmokesPerDay());
+		statsInfo.setMoneySaved((stats.getSmokesPerDay()*stats.getSmokesPackPrice()/20)*days.getDays());
+		statsInfo.setTimeSaved(stats.getSmokesPerDay()*10*days.getDays());
+		statsInfo.setLifeTimeGained(0.0076*statsInfo.getSmokesSaved());
 		
-		return repository.save(stats);
+		return statsInfo;
 	}
 	
 }

@@ -18,8 +18,8 @@ public class UserManager {
 		return (List<User>) repository.findAll();
 	}
 	
-	public User findByUsername(String id){
-		return repository.findByUsername(id);
+	public User findByUsername(String username){
+		return repository.findByUsername(username);
 	}
 	
 	public User save(User user) {

@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.everis.becaeoi.quitSmoking.core.manager.StatsManager;
 import com.everis.becaeoi.quitSmoking.persistence.entity.Stats;
 import com.everis.becaeoi.quitSmoking.service.DTO.StatsDTO;
+import com.everis.becaeoi.quitSmoking.service.DTO.StatsInfoDTO;
 
 @RestController
 @RequestMapping("/stats")
@@ -37,8 +38,8 @@ public class StatsController {
 	}
 	
 	@GetMapping("/{username}")
-	public StatsDTO findByUserUsername(@RequestParam String username){
-		return mapper.map(manager.findByUserUsername(username),StatsDTO.class);
+	public StatsInfoDTO showStatsInfo(@RequestParam String username){
+		return mapper.map(manager.showStatsInfo(username),StatsInfoDTO.class);
 	}
 	
 	@PostMapping("/")
