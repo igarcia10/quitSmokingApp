@@ -18,6 +18,12 @@ public class StatsManager {
 	@Autowired
 	private StatsRepository repository;
 	
+	private GregorianCalendar gc = new GregorianCalendar();
+	private DateTime start = new DateTime(gc);
+	private DateTime end = DateTime.now();
+	private Days days = Days.daysBetween(start, end);
+	
+	
 	public List<Stats> findAll(){
 		return (List<Stats>) repository.findAll();
 	}
@@ -33,21 +39,42 @@ public class StatsManager {
 	
 	private StatsInfo getStatsInfo(Stats stats) {
 		
-		StatsInfo statsInfo = new StatsInfo();		
-		GregorianCalendar gc = new GregorianCalendar();
-		gc.setTime(stats.getQuitSmoking());
-		DateTime start = new DateTime(gc);
-		DateTime end = DateTime.now();
-		Period period = new Period(start,end);
-		Days days = Days.daysBetween(start, end);
-		
-		statsInfo.setTimeWithoutSmoking(period.toString());
-		statsInfo.setSmokesSaved(days.getDays()*stats.getSmokesPerDay());
-		statsInfo.setMoneySaved((stats.getSmokesPerDay()*stats.getSmokesPackPrice()/20)*days.getDays());
-		statsInfo.setTimeSaved(stats.getSmokesPerDay()*10*days.getDays());
-		statsInfo.setLifeTimeGained(0.0076*statsInfo.getSmokesSaved());
+		StatsInfo statsInfo = new StatsInfo();
+		statsInfo.setTimeWithoutSmoking(getTimeWithoutSmoking(stats));
+		statsInfo.setSmokesSaved(getSmokesSaved(stats));
+		statsInfo.setMoneySaved(getMoveySaved(stats));
+		statsInfo.setTimeSaved(getTimeSaved(stats));
+		statsInfo.setLifeTimeGained(getLifeTimeGained(stats, statsInfo.getSmokesSaved()));
 		
 		return statsInfo;
+	}
+	
+	private String getTimeWithoutSmoking(Stats stats) {
+		gc.setTime(stats.getQuitSmoking());
+		Period period = new Period(start,end);
+		
+		return period.toString();
+	}
+	
+	private Integer getSmokesSaved(Stats stats) {
+		gc.setTime(stats.getQuitSmoking());
+		Days days = Days.daysBetween(start, end);
+		
+		return days.getDays()*stats.getSmokesPerDay();
+	}
+	
+	private Double getMoveySaved(Stats stats) {
+		gc.setTime(stats.getQuitSmoking());
+		
+		return (stats.getSmokesPerDay()*stats.getSmokesPackPrice()/20)*days.getDays();
+	}
+	
+	private Integer getTimeSaved(Stats stats) {
+		return stats.getSmokesPerDay()*10*days.getDays();
+	}
+	
+	private Double getLifeTimeGained(Stats stats, Integer smokesSaved) {
+		return 0.0076*smokesSaved;
 	}
 	
 }
