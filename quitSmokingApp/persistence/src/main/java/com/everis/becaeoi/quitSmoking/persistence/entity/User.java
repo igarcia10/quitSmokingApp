@@ -2,6 +2,7 @@ package com.everis.becaeoi.quitSmoking.persistence.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
@@ -28,7 +29,7 @@ public class User implements AppEntity {
 	private String email;
 	private String password;
 	
-	@OneToOne(mappedBy="user", fetch=FetchType.LAZY)
+	@OneToOne(mappedBy="user", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
 	@JoinColumn(name="stats_id")
 	private Stats stats;
 

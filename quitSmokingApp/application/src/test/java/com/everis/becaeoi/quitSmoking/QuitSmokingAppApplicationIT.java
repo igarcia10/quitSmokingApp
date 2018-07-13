@@ -63,7 +63,8 @@ public class QuitSmokingAppApplicationIT {
 				String.class);
 
 		// Assert
-		JSONAssert.assertEquals("[{'username': 'user1', 'name':'name1'}, {'username': 'user2', 'name':'name2'}]",
+		JSONAssert.assertEquals(
+				"[{username=\"user1\", name=\"name1\", surname=\"surname1\", birthDate=\"1990-09-30T23:00:00.000+0000\", email=\"abc@123.com\"}, {username=\"user2\", name=\"name2\", surname=\"surname2\", birthDate=\"1990-01-09T23:00:00.000+0000\", email=\"123@abc.com\"}]",
 				response.getBody(), false);
 	}
 

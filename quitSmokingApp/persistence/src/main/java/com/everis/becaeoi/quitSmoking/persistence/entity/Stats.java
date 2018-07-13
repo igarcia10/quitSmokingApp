@@ -2,6 +2,7 @@ package com.everis.becaeoi.quitSmoking.persistence.entity;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -30,7 +31,7 @@ public class Stats implements AppEntity {
 	private Double smokesPackPrice;
 	private Integer smokingYears;
 	
-	@OneToOne(fetch=FetchType.EAGER)
+	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.REMOVE)
  	@JoinColumn(name="user_id")
 	private User user;
 
