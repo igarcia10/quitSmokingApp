@@ -31,7 +31,7 @@ public class Stats implements AppEntity {
 	private Double smokesPackPrice;
 	private Integer smokingYears;
 	
-	@OneToOne(fetch=FetchType.EAGER, cascade=CascadeType.REMOVE)
+	@OneToOne(fetch=FetchType.EAGER)
  	@JoinColumn(name="user_id")
 	private User user;
 

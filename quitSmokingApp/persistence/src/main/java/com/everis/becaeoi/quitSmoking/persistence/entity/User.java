@@ -29,7 +29,7 @@ public class User implements AppEntity {
 	private String email;
 	private String password;
 	
-	@OneToOne(mappedBy="user", fetch=FetchType.LAZY, cascade=CascadeType.REMOVE)
+	@OneToOne(mappedBy="user", fetch=FetchType.LAZY)
 	@JoinColumn(name="stats_id")
 	private Stats stats;
 
